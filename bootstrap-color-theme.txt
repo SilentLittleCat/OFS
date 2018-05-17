@@ -1,0 +1,9 @@
+label label-default		#999999
+label label-primary		#418bca
+label label-success		#57b658
+label label-info		#59c1de
+label label-warning		#f2ad50
+label label-danger		#d8534c
+nav-back				#f8f8f8
+nav-focus				#e7e7e7
+nav-color				#777777
