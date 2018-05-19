@@ -17,7 +17,8 @@ class AuthenticateAdmin
     public function handle($request, Closure $next)
     {
         if(Auth::guard('admin')->guest()){
-            exit("你没有登录<a target='_parent' href='/admin/logout?returnUrl=" . urlencode('http://'.$_SERVER['HTTP_HOST']) . "'>请登录</a>");
+            // exit("你没有登录<a target='_parent' href='/admin/logout?returnUrl=" . urlencode('http://'.$_SERVER['HTTP_HOST']) . "'>请登录</a>");
+            return redirect('/admin/login');
         }
         $path = $request->path();
         if ($path == 'admin') {
@@ -28,12 +29,13 @@ class AuthenticateAdmin
         $role = session(LOGIN_MARK_SESSION_KEY);
         $user =Auth::guard('admin')->user();
         if(!$user['is_root']) {
-            if(!isset($role['role']) || !$role['role']) {
-                exit("你没有操作权限<a target='_parent' href='/admin/logout?returnUrl=" . urlencode('http://'.$_SERVER['HTTP_HOST']) . "'>重新登录</a>");
-            }
-            if(!array_key_exists($path,$role['role'])) {
-                exit("你没有操作权限<a target='_parent' href='/admin/logout?returnUrl=" . urlencode('http://'.$_SERVER['HTTP_HOST']) . "'>重新登录</a>");
-            }
+//            if(!isset($role['role']) || !$role['role']) {
+//                exit("你没有操作权限<a target='_parent' href='/admin/logout?returnUrl=" . urlencode('http://'.$_SERVER['HTTP_HOST']) . "'>重新登录</a>");
+//            }
+//            if(!array_key_exists($path,$role['role'])) {
+//                exit("你没有操作权限<a target='_parent' href='/admin/logout?returnUrl=" . urlencode('http://'.$_SERVER['HTTP_HOST']) . "'>重新登录</a>");
+//            }
+            return redirect('/admin/login');
         }
 
         return $next($request);
